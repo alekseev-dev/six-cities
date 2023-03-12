@@ -6,42 +6,75 @@ import LoginScreen from '../../pages/login-screen/login-screen';
 import MainScreen from '../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
-import PrivateRoute from '../private-route/private-route';
+import PrivateRouteFavorites from '../private-route-favorites/private-route-favorites';
+import { Offers } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
+import PrivateRouteLogin from '../private-route-login/private-route-login';
 
 
-function App(): JSX.Element {
+type AppScreenProps = {
+  offers: Offers;
+}
+
+function App({offers}: AppScreenProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainScreen />}
+            element={
+              <MainScreen/>
+            }
           />
           <Route
             path={AppRoute.Login}
-            element={<LoginScreen />}
+            element={
+              <PrivateRouteLogin
+                authorizationStatus={authorizationStatus}
+              >
+                <LoginScreen />
+              </PrivateRouteLogin>
+            }
           />
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
+              <PrivateRouteFavorites
+                authorizationStatus={authorizationStatus}
               >
-                <FavoritesScreen />
-              </PrivateRoute>
+                <FavoritesScreen
+                  offers={offers}
+                />
+              </PrivateRouteFavorites>
             }
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferScreen />}
+            element={
+              <OfferScreen
+                offer={offers[0]}
+              />
+            }
           />
           <Route
             path='*'
             element={<NotFoundScreen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
