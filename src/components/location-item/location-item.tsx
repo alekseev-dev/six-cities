@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import { AppRoute, CitiesNames } from '../../const';
+import { CitiesNames } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { chooseCity } from '../../store/action';
+import { chooseCity } from '../../store/app-process/app-process';
 
 type LocationItemProps = {
   city: CitiesNames;

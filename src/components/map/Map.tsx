@@ -1,8 +1,8 @@
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { City, Location, Offer, Offers } from '../../types/offer';
-import { CitiesNames, URL_PIN_CURRENT, URL_PIN_DEFAULT } from '../../const';
+import { Offer, Offers } from '../../types/offer';
+import { URL_PIN_CURRENT, URL_PIN_DEFAULT } from '../../const';
 
 
 const defaultCustomPin = L.icon({
@@ -24,12 +24,12 @@ type MapProps = {
 }
 
 function Map({offers, selectedPin}: MapProps) {
-  const {location} = offers[0];
-  const {latitude,longitude, zoom} = location;
 
+  const {city: {location}} = offers[0];
+  const {zoom, latitude, longitude} = location;
 
   return (
-    <MapContainer center={[latitude, longitude]} zoom={zoom} scrollWheelZoom={false}
+    <MapContainer center={[latitude, longitude]} zoom={zoom} scrollWheelZoom
       style={{ height: '100%' }}
     >
       <TileLayer

@@ -28,10 +28,10 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
-export enum DomainName {
+export enum NameSpace {
   Data = 'data',
   User = 'user',
-  City = 'city',
+  App = 'app',
 }
 
 export const URL_PIN_DEFAULT = 'img/pin.svg';

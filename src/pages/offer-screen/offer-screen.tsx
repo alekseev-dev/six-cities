@@ -3,11 +3,7 @@ import Header from '../../components/header/header';
 import Logo from '../../components/logo/logo';
 import { Offer } from '../../types/offer';
 
-type OfferScreenProps = {
-  offer: Offer;
-}
-
-function OfferScreen(props: OfferScreenProps): JSX.Element {
+function OfferScreen(): JSX.Element {
   const {offer} = props;
 
   return (

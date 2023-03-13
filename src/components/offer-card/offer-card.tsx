@@ -15,14 +15,13 @@ function OfferCard(props: OfferCardProps): JSX.Element {
   const [highlightFavoriteButton, setHighlightFavoriteButton] = useState(isFavorite);
 
   const offerCardHandler = (e: SyntheticEvent<HTMLElement>, isActive: boolean) => {
-    onOfferCardHover(isActive ? e.currentTarget.dataset.id : undefined);
+    onOfferCardHover(isActive ? offer.id : undefined);
   };
 
   return (
     <article className="cities__place-card place-card"
       onMouseEnter={(e) => offerCardHandler(e, true)}
       onMouseLeave={(e) => offerCardHandler(e, false)}
-      data-id={offer.id}
     >
       {isPremium &&
         <div className="place-card__mark">

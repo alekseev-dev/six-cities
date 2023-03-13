@@ -4,12 +4,14 @@ import {CitiesNames} from '../../const';
 import LocationItem from '../../components/location-item/location-item';
 import { useAppSelector } from '../../hooks';
 import Header from '../../components/header/header';
+import { getCurrentCity } from '../../store/app-process/selectors';
+import { getOfferList } from '../../store/data-process/selectors';
 
 
 function MainScreen(): JSX.Element {
 
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const offers = useAppSelector((state) => state.offerList);
+  const currentCity = useAppSelector(getCurrentCity);
+  const offers = useAppSelector(getOfferList);
 
   const filteredOffersByCity = [...offers.filter((item) => item.city.name === currentCity)];
 

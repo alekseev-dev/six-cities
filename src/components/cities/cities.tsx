@@ -1,4 +1,4 @@
-import { City, Location, Offer, Offers } from '../../types/offer';
+import { Offer, Offers } from '../../types/offer';
 import Map from '../map/Map';
 import OfferList from '../offer-list/offer-list';
 import { useState } from 'react';
@@ -11,6 +11,7 @@ type CitiesProps = {
 function Cities({offers, currentCity}: CitiesProps):JSX.Element {
 
   const [selectedPin, setSelectedPin] = useState<Offer | undefined>(undefined);
+
 
   const onOfferCardHover = (pinId: string | undefined):void => {
     const currentPin = offers.find((offer) => offer.id === pinId);
