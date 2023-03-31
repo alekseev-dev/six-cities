@@ -2,22 +2,29 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { logoutAction } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
 import Logo from '../logo/logo';
 
 
 function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isAuth = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
+  const {email, avatarUrl} = useAppSelector(getUserData);
 
   const dispatch = useAppDispatch();
 
   const authorizationStatusTrue = () => (
     <>
       <li className="header__nav-item user">
-        <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
-          <div className="header__avatar-wrapper user__avatar-wrapper">
+        <Link
+          to={AppRoute.Favorites}
+          className="header__nav-link header__nav-link--profile"
+        >
+          <div
+            style={{backgroundImage: `url(${avatarUrl})`}}
+            className="header__avatar-wrapper user__avatar-wrapper"
+          >
           </div>
-          <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+          <span className="header__user-name user__name">{email}</span>
         </Link>
       </li>
       <li className="header__nav-item">
@@ -54,7 +61,7 @@ function Header(): JSX.Element {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              {authorizationStatus === AuthorizationStatus.Auth
+              {isAuth
                 ? authorizationStatusTrue()
                 : authorizationStatusFalse()}
             </ul>

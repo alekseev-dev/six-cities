@@ -1,20 +1,28 @@
 import { NavLink } from 'react-router-dom';
 import { CitiesNames } from '../../const';
-import { useAppDispatch } from '../../hooks';
-import { chooseCity } from '../../store/app-process/app-process';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { appProcessActions } from '../../store/app-process/app-process';
+import { dataProcessActions } from '../../store/data-process/data-process';
+import { SortType } from '../../const';
+import { getCurrentCity } from '../../store/app-process/selectors';
 
 type LocationItemProps = {
   city: CitiesNames;
 }
 
-function LocationItem({ city }: LocationItemProps) {
+function LocationItem({city}: LocationItemProps) {
   const dispatch = useAppDispatch();
+  const currentCity = useAppSelector(getCurrentCity);
 
   return (
     <li className="locations__item">
       <NavLink
-        className="locations__item-link tabs__item" to='/'
-        onClick={() => dispatch(chooseCity(city))}
+        className={`locations__item-link tabs__item ${city === currentCity ? 'tabs__item--active' : ''}`}
+        to='/'
+        onClick={() => {
+          dispatch(appProcessActions.chooseCity(city));
+          dispatch(dataProcessActions.setSortType(SortType.Popular));
+        }}
       >
         <span>{city}</span>
       </NavLink>
@@ -24,4 +32,3 @@ function LocationItem({ city }: LocationItemProps) {
 
 export default LocationItem;
 
-// className={({ isActive }) =>`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} to="#"

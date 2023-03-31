@@ -1,3 +1,5 @@
+import { CitiesNames } from '../const';
+
 export type Host = {
   avatarUrl: string;
   id: number;
@@ -13,7 +15,7 @@ export type Location = {
 
 export type City = {
   location: Location;
-  name: string;
+  name: CitiesNames;
 }
 
 export type Offer = {
@@ -22,7 +24,7 @@ export type Offer = {
   description: string;
   goods: string[];
   host: Host;
-  id: string;
+  id: number;
   images: string[];
   isFavorite: boolean;
   isPremium: boolean;

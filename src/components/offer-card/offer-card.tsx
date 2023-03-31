@@ -1,34 +1,40 @@
 import { Offer } from '../../types/offer';
-import {Link} from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import {SyntheticEvent, useState} from 'react';
+import FavoriteButton, { favoriteButtonSmall } from '../favorite-button/favorite-button';
+import { converRatingToStars } from '../../utils';
 
 type OfferCardProps = {
   offer: Offer;
-  onOfferCardHover: (id: string | undefined) => void;
+  onOfferCardHover?: (id: number | null) => void;
 };
 
-function OfferCard(props: OfferCardProps): JSX.Element {
-  const { offer, onOfferCardHover } = props;
-  const { isPremium, isFavorite, previewImage, price, title, type } = offer;
+function OfferCard({offer, onOfferCardHover}: OfferCardProps): JSX.Element {
+  const { isPremium, rating, isFavorite, previewImage, price, title, type, id } = offer;
 
-  const [highlightFavoriteButton, setHighlightFavoriteButton] = useState(isFavorite);
+  const offerPath = generatePath(`${AppRoute.Offer}/:id`, {id: id.toString()});
 
-  const offerCardHandler = (e: SyntheticEvent<HTMLElement>, isActive: boolean) => {
-    onOfferCardHover(isActive ? offer.id : undefined);
+  const offerCardHandler = (value: number | null) => {
+    if (!onOfferCardHover) {
+      return;
+    }
+    onOfferCardHover(value);
   };
 
   return (
-    <article className="cities__place-card place-card"
-      onMouseEnter={(e) => offerCardHandler(e, true)}
-      onMouseLeave={(e) => offerCardHandler(e, false)}
+    <article
+      onMouseEnter={() => offerCardHandler(id)}
+      onMouseLeave={() => offerCardHandler(null)}
+      className="cities__place-card place-card"
     >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={AppRoute.Offer}>
+        <Link
+          to={offerPath}
+        >
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
         </Link>
       </div>
@@ -38,26 +44,24 @@ function OfferCard(props: OfferCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${highlightFavoriteButton ? 'place-card__bookmark-button--active' : ''}`}
-            onClick={() => {
-              setHighlightFavoriteButton(!highlightFavoriteButton);
-            }}
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton
+            id={id}
+            isFavorite={isFavorite}
+            overrides={favoriteButtonSmall}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: converRatingToStars(rating) }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer}>{title}</Link>
+          <Link
+            to={offerPath}
+          >
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

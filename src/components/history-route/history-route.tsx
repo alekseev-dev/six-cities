@@ -13,7 +13,6 @@ function HistoryRouter({
   basename,
   children,
 }: HistoryRouterProps) {
-  // console.log(history, basename, children);
 
   const [state, setState] = useState({
     action: history.action,

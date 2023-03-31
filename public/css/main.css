@@ -653,7 +653,7 @@ img {
   width: 100%;
   -ms-flex-item-align: stretch;
   align-self: stretch;
-  background-image: url(../img/map.jpg);
+  background-image: url(../img/no-places.png);
   background-size: 682px auto;
   background-repeat: no-repeat;
   background-position: -170px center
@@ -663,7 +663,7 @@ img {
 (min-resolution:144dpi),
 (min-resolution:1.5dppx) {
   .cities__map {
-    background-image: url(../img/map@2x.jpg);
+    background-image: url(../img/no-places@2x.png);
     background-size: 682px 794px
   }
 }
@@ -1616,6 +1616,15 @@ img {
   line-height: 1.334
 }
 
+.reviews__error {
+  width: 402px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.334;
+  color: red;
+}
+
 .reviews__star {
   padding-left: 15px;
   background-image: url(../img/star-active.svg);
@@ -1979,4 +1988,33 @@ img {
 .header__logo-link:not(.header__logo-link--active):focus,
 .header__logo-link:not(.header__logo-link--active):hover {
   opacity: .5
+}
+
+.shake {
+  animation: shake 0.6s;
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
 }

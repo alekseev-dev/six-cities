@@ -1,30 +1,26 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
-import { useRef, FormEvent} from 'react';
 import { useAppDispatch} from '../../hooks/index';
-import { AuthData } from '../../types/auth-data';
-import { loginAction } from '../../store/api-actions';
+import { AppRoute, CitiesNames } from '../../const';
+import { appProcessActions } from '../../store/app-process/app-process';
+import { Link } from 'react-router-dom';
+import LoginForm from '../../components/login-form/login-form';
+import { useCallback } from 'react';
 
 
 function LoginScreen(): JSX.Element {
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useAppDispatch();
 
-  const onSumbit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
-  };
+  const getRandomCity = useCallback(() => {
+    const cities = Object.values(CitiesNames);
+    const randomIndex = Math.floor(Math.random() * (cities.length));
+    return cities[randomIndex];
+  }, []);
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
+  const randomCity = getRandomCity();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      onSumbit({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
-      });
-    }
+  const onCityClick = () => {
+    dispatch(appProcessActions.chooseCity(randomCity));
   };
 
   return (
@@ -46,46 +42,16 @@ function LoginScreen(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form
-              onSubmit={handleSubmit}
-              className="login__form form"
-              action="#"
-              method="post"
-            >
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">E-mail</label>
-                <input
-                  ref={loginRef}
-                  className="login__input form__input"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  required
-                />
-              </div>
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">Password</label>
-                <input
-                  ref={passwordRef}
-                  className="login__input form__input"
-                  type="password" name="password"
-                  placeholder="Password"
-                  required
-                />
-              </div>
-              <button
-                className="login__submit form__submit button"
-                type="submit"
-              >
-                Sign in
-              </button>
-            </form>
+            <LoginForm />
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to={AppRoute.Root}>
+                <span
+                  onClick={onCityClick}
+                >{randomCity}
+                </span>
+              </Link>
             </div>
           </section>
         </div>

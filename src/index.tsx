@@ -15,10 +15,10 @@ store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ToastContainer />
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <ToastContainer />
+    <App />
+  </Provider>
+  // </React.StrictMode>
 );

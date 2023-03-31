@@ -17,4 +17,4 @@ export const appProcess = createSlice({
   }
 });
 
-export const {chooseCity} = appProcess.actions;
+export const {reducer: appReducer, actions: appProcessActions} = appProcess;

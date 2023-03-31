@@ -2,18 +2,10 @@ import { Helmet } from 'react-helmet-async';
 import Cities from '../../components/cities/cities';
 import {CitiesNames} from '../../const';
 import LocationItem from '../../components/location-item/location-item';
-import { useAppSelector } from '../../hooks';
 import Header from '../../components/header/header';
-import { getCurrentCity } from '../../store/app-process/selectors';
-import { getOfferList } from '../../store/data-process/selectors';
 
 
 function MainScreen(): JSX.Element {
-
-  const currentCity = useAppSelector(getCurrentCity);
-  const offers = useAppSelector(getOfferList);
-
-  const filteredOffersByCity = [...offers.filter((item) => item.city.name === currentCity)];
 
   return (
     <div className="page page--gray page--main">
@@ -26,7 +18,7 @@ function MainScreen(): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {Object.values(CitiesNames).map((city) => (
+              {(Object.values(CitiesNames) as CitiesNames[]).map((city) => (
                 <LocationItem
                   key={city}
                   city={city}
@@ -35,10 +27,7 @@ function MainScreen(): JSX.Element {
             </ul>
           </section>
         </div>
-        <Cities
-          offers={filteredOffersByCity}
-          currentCity={currentCity}
-        />
+        <Cities />
       </main>
     </div>
   );
