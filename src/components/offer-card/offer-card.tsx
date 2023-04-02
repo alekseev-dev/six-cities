@@ -1,30 +1,38 @@
 import { Offer } from '../../types/offer';
 import { generatePath, Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, mapType } from '../../const';
 import FavoriteButton, { favoriteButtonSmall } from '../favorite-button/favorite-button';
 import { converRatingToStars } from '../../utils';
+import { useAppDispatch } from '../../hooks';
+import { appProcessActions } from '../../store/app-process/app-process';
 
 type OfferCardProps = {
   offer: Offer;
-  onOfferCardHover?: (id: number | null) => void;
+  typeOfMap: mapType;
 };
 
-function OfferCard({offer, onOfferCardHover}: OfferCardProps): JSX.Element {
-  const { isPremium, rating, isFavorite, previewImage, price, title, type, id } = offer;
+function OfferCard({offer, typeOfMap}: OfferCardProps): JSX.Element {
+  const { isPremium, rating, isFavorite, previewImage, price, title, type, id, location } = offer;
 
   const offerPath = generatePath(`${AppRoute.Offer}/:id`, {id: id.toString()});
+  const dispatch = useAppDispatch();
 
-  const offerCardHandler = (value: number | null) => {
-    if (!onOfferCardHover) {
-      return;
+  const handleMouseEnter = () => {
+    if (typeOfMap === mapType.OnMainScreen) {
+      dispatch(appProcessActions.activeOfferCard({location, id}));
     }
-    onOfferCardHover(value);
+  };
+
+  const handleMouseLeave = () => {
+    if (typeOfMap === mapType.OnMainScreen) {
+      dispatch(appProcessActions.activeOfferCard(null));
+    }
   };
 
   return (
     <article
-      onMouseEnter={() => offerCardHandler(id)}
-      onMouseLeave={() => offerCardHandler(null)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="cities__place-card place-card"
     >
       {isPremium &&

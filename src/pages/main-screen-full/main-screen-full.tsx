@@ -5,8 +5,7 @@ import LocationItem from '../../components/location-item/location-item';
 import Header from '../../components/header/header';
 
 
-function MainScreen(): JSX.Element {
-
+function MainScreenFull(): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -33,4 +32,4 @@ function MainScreen(): JSX.Element {
   );
 }
 
-export default MainScreen;
+export default MainScreenFull;

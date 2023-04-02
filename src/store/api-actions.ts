@@ -9,6 +9,7 @@ import { dropToken, saveToken } from '../services/token';
 import { UserData } from '../types/user-data';
 import { dataProcessActions } from './data-process/data-process';
 import { Comments } from '../types/comment-data';
+import { appProcessActions } from './app-process/app-process';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
   extra: AxiosInstance;
@@ -21,15 +22,17 @@ export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
 );
 
 export const fetchOfferCardAction = createAsyncThunk<{offer: Offer; comments: Comments; offersNearby: Offers}, number, {
+  dispatch: AppDispatch;
   extra: AxiosInstance;
 }>(
   'data/fetchOfferCard',
-  async (id, { extra: api }) => {
+  async (id, {dispatch, extra: api }) => {
     const [{data: offer}, {data: comments}, {data: offersNearby}] = await Promise.all([
       api.get<Offer>(`${APIRoute.Hotels}/${id}`),
       api.get<Comments>(`${APIRoute.Comments}/${id}`),
       api.get<Offers>(`${APIRoute.Hotels}/${id}/nearby`),
     ]);
+    dispatch(appProcessActions.activeOfferCard({location: offer.location, id: offer.id}));
     return {offer, comments, offersNearby};
   }
 );

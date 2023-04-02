@@ -1,13 +1,13 @@
 import OfferCard from '../offer-card/offer-card';
 import { Offers } from '../../types/offer';
+import { mapType } from '../../const';
 
 type OfferListProps = {
   offers: Offers;
-  onOfferCardHover: (id: number | null) => void;
 }
 
 function OfferList(props: OfferListProps): JSX.Element {
-  const {offers, onOfferCardHover} = props;
+  const {offers} = props;
 
   if (offers.length === 0) {
     return (
@@ -25,7 +25,7 @@ function OfferList(props: OfferListProps): JSX.Element {
           <OfferCard
             key={keyValue}
             offer={offer}
-            onOfferCardHover={onOfferCardHover}
+            typeOfMap={mapType.OnMainScreen}
           />
         );
       })}

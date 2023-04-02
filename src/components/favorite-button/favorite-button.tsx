@@ -29,7 +29,8 @@ function FavoriteButton({id, isFavorite, overrides}: FavoriteButtonProps): JSX.E
 
   const {width, height, name} = overrides;
   return (
-    <button className={`${name}__bookmark-button button ${isFavorite ? `${name}__bookmark-button--active` : ''}`}
+    <button
+      className={`${name}__bookmark-button button ${isFavorite ? `${name}__bookmark-button--active` : ''}`}
       onClick={addToFavorite}
       type="button"
     >

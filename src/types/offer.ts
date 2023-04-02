@@ -37,6 +37,8 @@ export type Offer = {
   type: string;
 }
 
+export type activeOffer = Pick<Offer, 'location' | 'id'>
+
 export type Offers = Offer[];
 
 export type Locations = Location[];
