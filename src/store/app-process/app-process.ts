@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CitiesNames, NameSpace } from '../../const';
+import { activeOffer } from '../../types/offer';
 import { AppProcess } from '../../types/state';
 
 
 const initialState: AppProcess = {
   currentCity: CitiesNames.Paris,
+  activeOfferCard: null,
 };
 
 export const appProcess = createSlice({
@@ -13,6 +15,9 @@ export const appProcess = createSlice({
   reducers: {
     chooseCity: (state, action: PayloadAction<CitiesNames>) => {
       state.currentCity = action.payload;
+    },
+    activeOfferCard: (state, action: PayloadAction<activeOffer | null>) => {
+      state.activeOfferCard = action.payload;
     }
   }
 });

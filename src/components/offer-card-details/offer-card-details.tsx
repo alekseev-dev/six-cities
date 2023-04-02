@@ -26,7 +26,7 @@ function OfferCardDetails({offer}: OfferCardDetailsProps): JSX.Element {
   } = offer;
 
   return (
-    <section className="property">
+    <>
       <OfferCardDetailsPropGallery
         images={images}
       />
@@ -122,8 +122,7 @@ function OfferCardDetails({offer}: OfferCardDetailsProps): JSX.Element {
           <OfferCardDetailsReviews />
         </div>
       </div>
-      <section className="property__map map"></section>
-    </section>
+    </>
   );
 }
 

@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus, Status } from '../../const';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
-import MainScreen from '../../pages/main-screen/main-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import PrivateRouteFavorites from '../private-route-favorites/private-route-favorites';
@@ -14,6 +13,7 @@ import browserHistory from '../../browser-history';
 import PrivateRouteLogin from '../private-route-login/private-route-login';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getDataStatus } from '../../store/data-process/selectors';
+import MainScreen from '../main-screen/main-screen';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);

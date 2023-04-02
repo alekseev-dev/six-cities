@@ -58,6 +58,11 @@ export const RatingTitle = [
   'perfect',
 ];
 
+export enum mapType {
+  OnMainScreen = 'onMainScreen',
+  OnOfferScreen = 'onOfferScreen',
+}
+
 export const URL_PIN_DEFAULT = 'img/pin.svg';
 export const URL_PIN_CURRENT = 'img/pin-active.svg';
 
