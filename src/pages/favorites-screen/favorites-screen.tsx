@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import FavoritesLocationList from '../../components/favorites-location-list/favorites-location-list';
 import Header from '../../components/header/header';
-
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavoritesOffersAction } from '../../store/api-actions';

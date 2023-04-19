@@ -1,8 +1,8 @@
 import { Offer } from '../../types/offer';
-import { converRatingToStars } from '../../utils';
 import FavoriteButton, { favoriteButtonBig } from '../favorite-button/favorite-button';
 import OfferCardDetailsReviews from './offer-card-details-reviews/offer-card-details-reviews';
 import OfferCardDetailsPropGallery from './offer-card-details-prop-gallery/offer-card-details-prop-gallery';
+import { converRatingToStars } from '../../utils/utils';
 
 type OfferCardDetailsProps = {
   offer: Offer | Record<string, never>;
@@ -51,7 +51,7 @@ function OfferCardDetails({offer}: OfferCardDetailsProps): JSX.Element {
           <div className="property__rating rating">
             <div className="property__stars rating__stars">
               <span
-                style={{width: converRatingToStars(rating)}}
+                style={{width: `${converRatingToStars(rating)}%`}}
               >
               </span>
               <span className="visually-hidden">Rating</span>
@@ -83,9 +83,9 @@ function OfferCardDetails({offer}: OfferCardDetailsProps): JSX.Element {
           <div className="property__inside">
             <h2 className="property__inside-title">What&apos;s inside</h2>
             <ul className="property__inside-list">
-              {goods.map((good) => (
+              {goods.map((good, i) => (
                 <li
-                  key={good}
+                  key={`${good + i.toString()}`}
                   className="property__inside-item"
                 >
                   {good}

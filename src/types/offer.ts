@@ -37,7 +37,9 @@ export type Offer = {
   type: string;
 }
 
-export type activeOffer = Pick<Offer, 'location' | 'id'>
+export type ActiveOffer = Pick<Offer, 'location' | 'id'>
+
+export type OffersPins = Pick<Offer, 'id'> & Location
 
 export type Offers = Offer[];
 

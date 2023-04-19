@@ -1,5 +1,5 @@
 import { Comment } from '../../../types/comment-data';
-import { converRatingToStars, getComentData } from '../../../utils';
+import { converRatingToStarsToRound, getComentData } from '../../../utils/utils';
 
 
 type ReviewItemProps = {
@@ -29,7 +29,7 @@ function ReviewItem({review}: ReviewItemProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: converRatingToStars(rating)}}></span>
+            <span style={{width: converRatingToStarsToRound(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

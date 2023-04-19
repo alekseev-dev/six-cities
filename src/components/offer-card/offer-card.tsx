@@ -1,30 +1,39 @@
 import { Offer } from '../../types/offer';
 import { generatePath, Link } from 'react-router-dom';
-import { AppRoute, mapType } from '../../const';
+import { AppRoute, OfferCardType } from '../../const';
 import FavoriteButton, { favoriteButtonSmall } from '../favorite-button/favorite-button';
-import { converRatingToStars } from '../../utils';
 import { useAppDispatch } from '../../hooks';
 import { appProcessActions } from '../../store/app-process/app-process';
+import { converRatingToStarsToRound } from '../../utils/utils';
+import React from 'react';
 
 type OfferCardProps = {
   offer: Offer;
-  typeOfMap: mapType;
+  cardType: OfferCardType;
+  imageWidth: string;
+  imageHeight: string;
+  hightLightPins: boolean;
 };
 
-function OfferCard({offer, typeOfMap}: OfferCardProps): JSX.Element {
+function OfferCard({offer, cardType, imageWidth, imageHeight, hightLightPins}: OfferCardProps): JSX.Element {
   const { isPremium, rating, isFavorite, previewImage, price, title, type, id, location } = offer;
 
   const offerPath = generatePath(`${AppRoute.Offer}/:id`, {id: id.toString()});
   const dispatch = useAppDispatch();
 
+  const selectCardTypeClass = cardType === OfferCardType.PlaceCard
+    ? OfferCardType.PlaceCard
+    : OfferCardType.FavoritesCard;
+
+
   const handleMouseEnter = () => {
-    if (typeOfMap === mapType.OnMainScreen) {
+    if (cardType === OfferCardType.PlaceCard && hightLightPins) {
       dispatch(appProcessActions.activeOfferCard({location, id}));
     }
   };
 
   const handleMouseLeave = () => {
-    if (typeOfMap === mapType.OnMainScreen) {
+    if (cardType === OfferCardType.PlaceCard && hightLightPins) {
       dispatch(appProcessActions.activeOfferCard(null));
     }
   };
@@ -33,20 +42,27 @@ function OfferCard({offer, typeOfMap}: OfferCardProps): JSX.Element {
     <article
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="cities__place-card place-card"
+      className={`${cardType === OfferCardType.FavoritesCard ? 'favorites__card' : 'cities__place-card'}  place-card`}
+      data-testid='offer-card'
     >
-      {isPremium &&
+      {OfferCardType.PlaceCard && isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${selectCardTypeClass}__image-wrapper place-card__image-wrapper`}>
         <Link
           to={offerPath}
         >
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
+          <img
+            className="place-card__image"
+            src={previewImage}
+            width={imageWidth}
+            height={imageHeight}
+            alt="Place image"
+          />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${OfferCardType.FavoritesCard ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -60,7 +76,7 @@ function OfferCard({offer, typeOfMap}: OfferCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: converRatingToStars(rating) }}></span>
+            <span style={{ width: converRatingToStarsToRound(rating) }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -77,4 +93,4 @@ function OfferCard({offer, typeOfMap}: OfferCardProps): JSX.Element {
   );
 }
 
-export default OfferCard;
+export default React.memo(OfferCard);

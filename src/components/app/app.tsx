@@ -5,15 +5,12 @@ import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
-import PrivateRouteFavorites from '../private-route-favorites/private-route-favorites';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-import HistoryRouter from '../history-route/history-route';
-import browserHistory from '../../browser-history';
-import PrivateRouteLogin from '../private-route-login/private-route-login';
+import PrivateRoute from '../private-route/private-route';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getDataStatus } from '../../store/data-process/selectors';
-import MainScreen from '../main-screen/main-screen';
+import MainScreen from '../../pages/main-screen/main-screen';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -27,46 +24,46 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
-        <Routes>
-          <Route
-            path={AppRoute.Root}
-            element={
-              <MainScreen/>
-            }
-          />
-          <Route
-            path={AppRoute.Login}
-            element={
-              <PrivateRouteLogin
-                authorizationStatus={authorizationStatus}
-              >
-                <LoginScreen />
-              </PrivateRouteLogin>
-            }
-          />
-          <Route
-            path={AppRoute.Favorites}
-            element={
-              <PrivateRouteFavorites
-                authorizationStatus={authorizationStatus}
-              >
-                <FavoritesScreen />
-              </PrivateRouteFavorites>
-            }
-          />
-          <Route
-            path={`${AppRoute.Offer}/:id`}
-            element={
-              <OfferScreen />
-            }
-          />
-          <Route
-            path='*'
-            element={<NotFoundScreen />}
-          />
-        </Routes>
-      </HistoryRouter>
+      <Routes>
+        <Route
+          path={AppRoute.Root}
+          element={
+            <MainScreen/>
+          }
+        />
+        <Route
+          path={AppRoute.Login}
+          element={
+            <PrivateRoute
+              authorizationStatus={authorizationStatus}
+              routeType={AppRoute.Root}
+            >
+              <LoginScreen />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={AppRoute.Favorites}
+          element={
+            <PrivateRoute
+              authorizationStatus={authorizationStatus}
+              routeType={AppRoute.Favorites}
+            >
+              <FavoritesScreen />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={`${AppRoute.Offer}/:id`}
+          element={
+            <OfferScreen />
+          }
+        />
+        <Route
+          path='*'
+          element={<NotFoundScreen />}
+        />
+      </Routes>
     </HelmetProvider>
   );
 }

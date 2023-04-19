@@ -7,8 +7,8 @@ function OfferCardDetailsPropGallery({images}: OfferCardDetailsPropGalleryProps)
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
-        {images.slice(0, 6).map((picture) => {
-          const keyValue = `${picture}`;
+        {images.slice(0, 6).map((picture, i) => {
+          const keyValue = `${picture + i.toString()}`;
           return (
             <div
               key={keyValue}

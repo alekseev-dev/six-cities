@@ -15,7 +15,7 @@ function NotFoundScreen(): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {(Object.values(CitiesNames) ).map((city) => (
+              {(Object.values(CitiesNames)).map((city) => (
                 <LocationItem
                   key={city}
                   city={city}

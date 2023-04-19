@@ -38,13 +38,11 @@ export const fetchOfferCardAction = createAsyncThunk<{offer: Offer; comments: Co
 );
 
 export const fetchFavoritesOffersAction = createAsyncThunk<Offers, undefined, {
-  dispatch: AppDispatch;
   extra: AxiosInstance;
 }>(
   'favorites/fetchFavoritesOffers',
-  async (_arg, {dispatch, extra: api }) => {
+  async (_arg, {extra: api }) => {
     const {data} = await api.get<Offers>(APIRoute.Favorite);
-    dispatch(redirectToRoute(AppRoute.Favorites));
     return data;
   }
 );
@@ -74,23 +72,22 @@ export const checkAuthAction = createAsyncThunk<UserData, undefined, {
   fulfillWithValue: UserData;
   }>(
     'user/checkAuth',
-    async (_arg, {extra: api, fulfillWithValue}) => {
+    async (_arg, {extra: api}) => {
       const { data } = await api.get<UserData>(APIRoute.Login);
-      return fulfillWithValue(data).payload;
+      return data;
     }
   );
 
 export const loginAction = createAsyncThunk<UserData, AuthData, {
   dispatch: AppDispatch;
   extra: AxiosInstance;
-  fulfillWithValue: UserData;
 }>(
   'user/login',
-  async ({email, password}, {dispatch, extra: api, fulfillWithValue }) => {
+  async ({email, password}, {dispatch, extra: api}) => {
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
     dispatch(redirectToRoute(AppRoute.Root));
-    return fulfillWithValue(data).payload;
+    return data;
   }
 );
 

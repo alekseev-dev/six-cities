@@ -39,7 +39,7 @@ function LoginForm(): JSX.Element {
       method="post"
     >
       <div className="login__input-wrapper form__input-wrapper">
-        <label className="visually-hidden">E-mail</label>
+        <label className="visually-hidden" htmlFor="email">E-mail</label>
         <input
           onChange={handleInputChange}
           value={formData.email}
@@ -47,11 +47,13 @@ function LoginForm(): JSX.Element {
           type="email"
           name="email"
           placeholder="Email"
+          id="email"
           required
+          data-testid='email'
         />
       </div>
       <div className="login__input-wrapper form__input-wrapper">
-        <label className="visually-hidden">Password</label>
+        <label className="visually-hidden" htmlFor="password">Password</label>
         <input
           onChange={(evt) => {
             handleInputChange(evt);
@@ -62,12 +64,15 @@ function LoginForm(): JSX.Element {
           className="login__input form__input"
           type="password" name="password"
           placeholder="Password"
+          id="password"
           required
+          data-testid='password'
         />
       </div>
       <button
         className="login__submit form__submit button"
         type="submit"
+        data-testid='sign-in'
       >
       Sign in
       </button>

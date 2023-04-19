@@ -1,10 +1,10 @@
 import { useAppDispatch } from '../../hooks';
 import { Offers } from '../../types/offer';
-import FavoritesLocationItem from '../favorites-location-item/favorites-location-item';
 import { appProcessActions } from '../../store/app-process/app-process';
 import { Link } from 'react-router-dom';
-import { AppRoute, SortType } from '../../const';
+import { AppRoute, OfferCardType, SortType } from '../../const';
 import { dataProcessActions } from '../../store/data-process/data-process';
+import OfferCard from '../offer-card/offer-card';
 
 type FavoritesLocationItemsProps = {
   offers: Offers;
@@ -32,9 +32,13 @@ function FavoritesLocationItems({offers}: FavoritesLocationItemsProps): JSX.Elem
       </div>
       <div className="favorites__places">
         {offers.map((offer) => (
-          <FavoritesLocationItem
+          <OfferCard
             key={offer.id}
             offer={offer}
+            cardType={OfferCardType.FavoritesCard}
+            imageWidth='150'
+            imageHeight='110'
+            hightLightPins={false}
           />))}
       </div>
     </li>

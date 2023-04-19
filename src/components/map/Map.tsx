@@ -3,10 +3,11 @@ import 'leaflet/dist/leaflet.css';
 import L, { Marker } from 'leaflet';
 import { Icon } from 'leaflet';
 import { Offers } from '../../types/offer';
-import { mapType, URL_PIN_CURRENT, URL_PIN_DEFAULT } from '../../const';
+import { URL_PIN_CURRENT, URL_PIN_DEFAULT } from '../../const';
 import useMap from '../../hooks/useMap';
 import { useAppSelector } from '../../hooks';
 import { getActiveOfferCard } from '../../store/app-process/selectors';
+import { getPinsWithActivePin, getPinsWIthoutActivePin } from '../../map-utils';
 
 const defaultCustomPin = new Icon({
   iconUrl: URL_PIN_DEFAULT,
@@ -23,10 +24,9 @@ const currentCustomPin = new Icon({
 
 type MapProps = {
   offers: Offers;
-  type: mapType;
 }
 
-function Map({offers, type}: MapProps): JSX.Element {
+function Map({offers}: MapProps): JSX.Element {
   const cityLocation = offers[0].city.location;
   const selectedPin = useAppSelector(getActiveOfferCard);
 
@@ -34,12 +34,12 @@ function Map({offers, type}: MapProps): JSX.Element {
   const map = useMap(mapRef, cityLocation);
 
   const points = useMemo(() => {
-    if (type === mapType.OnOfferScreen && selectedPin) {
-      return offers.map((offer) => ({...offer.location, id: offer.id})).concat({id: selectedPin.id, ...selectedPin.location});
+    if (selectedPin) {
+      return getPinsWithActivePin(offers, selectedPin);
     } else {
-      return offers.map((offer) => ({...offer.location, id: offer.id}));
+      return getPinsWIthoutActivePin(offers);
     }
-  }, [offers, type, selectedPin]);
+  }, [offers, selectedPin]);
 
 
   useEffect(() => {
@@ -56,6 +56,8 @@ function Map({offers, type}: MapProps): JSX.Element {
         const marker = new Marker({
           lat: pin.latitude,
           lng: pin.longitude,
+        }, {
+          alt: 'Marker',
         });
 
         marker
@@ -76,6 +78,7 @@ function Map({offers, type}: MapProps): JSX.Element {
     <div
       ref={mapRef}
       style={{ height: '100%' }}
+      data-testid='map'
     >
     </div>
   );

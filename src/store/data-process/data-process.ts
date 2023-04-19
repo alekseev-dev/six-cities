@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace, SortType, Status } from '../../const';
 import { DataProcess } from '../../types/state';
-import { checkForEmptyArray } from '../../utils';
+import { checkForEmptyArray } from '../../utils/utils';
 import { changeOfferStatusAction, fetchFavoritesOffersAction, fetchOfferCardAction, fetchOffersAction, submitReviewAction } from '../api-actions';
 
 
@@ -25,6 +25,9 @@ export const dataProcess = createSlice({
         if (offer.isFavorite) {
           offer.isFavorite = false;
         }
+        if (state.openedOfferCard) {
+          state.openedOfferCard.isFavorite = false;
+        }
       });
     },
     setSortType: (state, action: PayloadAction<SortType>) => {
@@ -47,6 +50,10 @@ export const dataProcess = createSlice({
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offerList = action.payload;
         state.dataStatus = Status.Success;
+      })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.offerList = [];
+        state.dataStatus = Status.Error;
       })
       .addCase(fetchFavoritesOffersAction.fulfilled, (state, action) => {
         state.favoritesOffers = action.payload;
@@ -93,3 +100,4 @@ export const dataProcess = createSlice({
 });
 
 export const { reducer: dataProcessReducer, actions: dataProcessActions} = dataProcess;
+export {initialState as dataProcessInitialState};

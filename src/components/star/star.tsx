@@ -16,6 +16,7 @@ function Star({value, title, setRating}: StarProps): JSX.Element {
         name="rating" value={value}
         id={`${value}-stars`}
         type="radio"
+        data-testid="star"
       />
       <label
         htmlFor={`${value}-stars`}

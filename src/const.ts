@@ -13,7 +13,7 @@ export enum AuthorizationStatus {
 
 export enum CitiesNames {
   Paris = 'Paris',
-  Desseldorf = 'Dusseldorf',
+  Dusseldorf = 'Dusseldorf',
   Brussels = 'Brussels',
   Colonge = 'Cologne',
   Hamburg = 'Hamburg',
@@ -58,11 +58,13 @@ export const RatingTitle = [
   'perfect',
 ];
 
-export enum mapType {
-  OnMainScreen = 'onMainScreen',
-  OnOfferScreen = 'onOfferScreen',
+export enum OfferCardType {
+  PlaceCard = 'cities',
+  FavoritesCard = 'favorites',
 }
 
 export const URL_PIN_DEFAULT = 'img/pin.svg';
 export const URL_PIN_CURRENT = 'img/pin-active.svg';
 
+export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENT_LENGTH = 300;

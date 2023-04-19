@@ -5,7 +5,6 @@ import OffersSort from '../offers-sort/offers-sort';
 import { useAppSelector } from '../../hooks';
 import { selectOffersByFilter } from '../../store/data-process/selectors';
 import { getCurrentCity } from '../../store/app-process/selectors';
-import { mapType } from '../../const';
 
 function Cities():JSX.Element {
   const sortedOffers = useAppSelector(selectOffersByFilter) as Offers;
@@ -28,7 +27,6 @@ function Cities():JSX.Element {
           <section className="cities__map map">
             <Map
               offers={sortedOffers}
-              type={mapType.OnMainScreen}
             />
           </section>
         </div>

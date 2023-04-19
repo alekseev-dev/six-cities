@@ -23,6 +23,7 @@ function LocationItem({city}: LocationItemProps) {
           dispatch(appProcessActions.chooseCity(city));
           dispatch(dataProcessActions.setSortType(SortType.Popular));
         }}
+        data-testid='pagination-city'
       >
         <span>{city}</span>
       </NavLink>

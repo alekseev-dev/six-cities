@@ -28,11 +28,13 @@ function FavoriteButton({id, isFavorite, overrides}: FavoriteButtonProps): JSX.E
   const [addToFavorite] = useFavoriteButton(id, isFavorite);
 
   const {width, height, name} = overrides;
+
   return (
     <button
       className={`${name}__bookmark-button button ${isFavorite ? `${name}__bookmark-button--active` : ''}`}
       onClick={addToFavorite}
       type="button"
+      data-testid='favorite-button'
     >
       <svg
         className={`${name}__bookmark-icon`}

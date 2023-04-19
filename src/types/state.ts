@@ -1,7 +1,7 @@
 import { AuthorizationStatus, CitiesNames, SortType, Status } from '../const';
 import { store } from '../store';
 import { Comments } from './comment-data';
-import { activeOffer, Offer, Offers } from './offer';
+import { ActiveOffer, Offer, Offers } from './offer';
 import { UserData } from './user-data';
 
 
@@ -26,7 +26,7 @@ export type DataProcess = {
 
 export type AppProcess = {
   currentCity: CitiesNames;
-  activeOfferCard: activeOffer | null;
+  activeOfferCard: ActiveOffer | null;
 }
 
 export type FavoritesProcess = {

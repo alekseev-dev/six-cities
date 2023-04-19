@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { dataProcessActions } from '../../store/data-process/data-process';
 import Map from '../../components/map/Map';
-import { mapType } from '../../const';
+import { OfferCardType } from '../../const';
 
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
@@ -52,7 +52,6 @@ function OfferScreen(): JSX.Element {
         <section className="property__map map">
           <Map
             offers={offersNearby}
-            type={mapType.OnOfferScreen}
           />
         </section>
         <div className="container">
@@ -63,7 +62,10 @@ function OfferScreen(): JSX.Element {
                 <OfferCard
                   key={item.id}
                   offer={item}
-                  typeOfMap={mapType.OnOfferScreen}
+                  cardType={OfferCardType.PlaceCard}
+                  imageWidth='260'
+                  imageHeight='200'
+                  hightLightPins={false}
                 />
               ))}
             </div>

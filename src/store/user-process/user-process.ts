@@ -29,8 +29,8 @@ export const userProcess = createSlice({
         state.authorizationStatus = AuthorizationStatus.NoAuth;
         state.userData = {};
       });
-
   }
 });
 
 export const {reducer: userReducer, actions: userProcessActions} = userProcess;
+export {initialState as userProcessInitialState};

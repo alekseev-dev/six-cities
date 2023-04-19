@@ -1,6 +1,6 @@
 import OfferCard from '../offer-card/offer-card';
 import { Offers } from '../../types/offer';
-import { mapType } from '../../const';
+import { OfferCardType } from '../../const';
 
 type OfferListProps = {
   offers: Offers;
@@ -25,7 +25,10 @@ function OfferList(props: OfferListProps): JSX.Element {
           <OfferCard
             key={keyValue}
             offer={offer}
-            typeOfMap={mapType.OnMainScreen}
+            cardType={OfferCardType.PlaceCard}
+            imageWidth='260'
+            imageHeight='200'
+            hightLightPins
           />
         );
       })}

@@ -46,7 +46,11 @@ function LoginScreen(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoute.Root}>
+              <Link
+                className="locations__item-link"
+                to={AppRoute.Root}
+                data-testid='random-city'
+              >
                 <span
                   onClick={onCityClick}
                 >{randomCity}

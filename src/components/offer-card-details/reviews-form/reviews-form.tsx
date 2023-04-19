@@ -1,25 +1,19 @@
 import { FormEvent, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { RatingTitle, Stars, Status } from '../../../const';
+import { MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, RatingTitle, Stars, Status } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { submitReviewAction } from '../../../store/api-actions';
 import { getSubmitReviewStatus } from '../../../store/data-process/selectors';
-import Star from '../../stars/star';
-
+import { reversedRatingTitle, reversedStars } from '../../../utils/utils';
+import Star from '../../star/star';
 
 function ReviewsForm(): JSX.Element {
-  const MIN_COMMENT_LENGTH = 50;
-  const MAX_COMMENT_LENGTH = 300;
-
-  const reversedRatingTitle: readonly string[] = RatingTitle.slice().reverse();
-  const reversedStars: readonly string[] = Stars.slice().reverse();
+  const dispatch = useAppDispatch();
 
   const status = useAppSelector(getSubmitReviewStatus);
   const isLoading = status === Status.Loading;
   const isError = status === Status.Error;
   const isSubmitted = status === Status.Success;
-
-  const dispatch = useAppDispatch();
 
   const {id} = useParams<string>();
   const idToNumber = Number(id);
@@ -50,6 +44,8 @@ function ReviewsForm(): JSX.Element {
         commentLength > MIN_COMMENT_LENGTH &&
         commentLength < MAX_COMMENT_LENGTH
       );
+
+
     }
   };
 
@@ -70,13 +66,13 @@ function ReviewsForm(): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {
-          reversedStars
+          reversedStars(Stars)
             .map((value, index) => (
               <Star
                 key={value}
                 value={value}
                 setRating={setRating}
-                title={reversedRatingTitle[index]}
+                title={reversedRatingTitle(RatingTitle)[index]}
               />
             ))
         }
@@ -88,6 +84,7 @@ function ReviewsForm(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        data-testid='comment-textarea'
       >
       </textarea>
       <div className="reviews__button-wrapper">

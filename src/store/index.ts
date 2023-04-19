@@ -7,8 +7,8 @@ export const api = createAPI();
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDeaultMiddleware) =>
-    getDeaultMiddleware({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
       thunk: {
         extraArgument: api,
       }
