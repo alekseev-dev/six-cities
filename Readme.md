@@ -1,90 +1,59 @@
-# [6 Cities](six-cities-kappa.vercel.app)
+<!-- # [6 Cities](six-cities-kappa.vercel.app) -->
+<a href="six-cities-kappa.vercel.app">
+  <img width="120" src="https://raw.githubusercontent.com/always-sixteen/six-cities/7db7c00b533dfc7bca2f76f57e061a0729d01de2/public/img/logo.svg" alt="6 cities">
+</a>
 
-# Руководство по работе с проектом
+### Preview
+----
+<table>
+  <tr>
+      <td>
+        <a href="https://github.com/always-sixteen/six-cities/blob/master/asserts/main-screen.png?raw=true">
+          <img width="300px" caption="Подпись под картинкой" src="https://github.com/always-sixteen/six-cities/blob/master/asserts/main-screen.png?raw=true" alt="main page preview" />
+          <p align="center">Main page</p>
+        <a>
+      </td>
+      <td>
+        <a href="https://github.com/always-sixteen/six-cities/blob/master/asserts/favorites-screen.png?raw=true">
+          <img width="300px" caption="Подпись под картинкой" src="https://github.com/always-sixteen/six-cities/blob/master/asserts/favorites-screen.png?raw=true" alt="favorites page preview" />
+        <p align="center">Favorites page</p>
+        <a>
+      </td>
+  </tr>
+  <tr>
+      <td>
+        <a href="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/offer-screen.png">
+          <img width="300px" caption="Подпись под картинкой" src="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/offer-screen.png" alt="offer page preview" />
+        <p align="center">Offer page</p>
+        <a>
+      </td>
+      <td>
+        <a href="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/login-screen.png">
+          <img width="300px" src="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/login-screen.png" alt="login page preview" />
+        <p align="center">Login page</p>
+        <a>
+      </td>
+  </tr>
+</table>
 
-Данный проект создан с помощью [Create React App](https://github.com/facebook/create-react-app).
-
-## Структура проекта
-
+# Технологический стэк:
 ---
+React, TypeScript, Redux, Redux Toolkit, HTML, CSS, Jest, React Testing Library,
 
-_Не удаляйте и не изменяйте папки и файлы:_
-_`.editorconfig`, `.gitattributes`, `.gitignore`, `package.json`._
 
----
 
-### public
+# Инструкция для запуска проекта
+-----
+### Запуск проекта:
 
-Директория для размещения статичных ресурсов (шрифты, стили, изображения и так далее). Корневая директория проекта.
+- Клонируйте репозиторий: `git clone https://github.com/always-sixteen/six-cities.git`
+- Перейдите в папку с проектом `cd six-cities`
+- Установите зависимости: `npm install`
+- Запустите проект: `npm start`
 
-**Обратите внимание**, файл `Readme.md`, в директории `public`, содержит описание подготовительного процесса, который вам необходимо выполнить перед тем, как приступать к работе над проектом.
+### Запуск тестов:
 
-### src
-
-В директории размещаются исходный код проекта: компоненты, файлы с тестами, модули и так далее. Структура директории `src` может быть произвольной.
-
-## Сценарии
-
-После создания проекта вам доступны следующие сценарии. Обратите внимание, для запуска сценария, вы должны находится в директории проекта (`./project`).
-
-### Запуск проекта
-
-```bash
-npm start
-```
-
-После запуска, приложение доступно для просмотра в браузере по адресу [http://localhost:3000](http://localhost:3000).
-
-При сохранении изменений, проект перезапускается и обновляется в браузере. Таким образом, вы можете следить за разработкой проекта в режиме реального времени.
-
-**Обратите внимание**, режим разработки настроен таким образом, при котором ошибки, найденные статическим анализатором кода **ESLint**, отображаются в той же вкладке браузера, в которой запущен проект.
-
-### Запуск тестов
-
-```bash
-npm test
-```
-
-Запуск тестов приложения в интерактивном режиме.
+- Запуск тестов приложения в интерактивном режиме: `npm test`
 
 В данном случае, имеются в виду тесты, которые вынесены в отдельные файлы, в имени которых присутствует суффикс `*.test.*`. Например, `app.test.tsx`.
 
-Подробную информацию вы можете найти на странице [Запуск тестов](https://facebook.github.io/create-react-app/docs/running-tests).
-
-### Проверка линтером
-
-```bash
-npm run lint
-```
-
-Запуск проверки проекта статическим анализатором кода **ESLint**.
-
-Анализ кода производится только в файлах, которые находятся в директории `src`.
-
-**Обратите внимание**, при запуске данной команды, ошибки выводятся в терминал.
-
-### Сборка проекта
-
-```bash
-npm run build
-```
-
-Запуск сборки приложения.
-
-В процессе сборки приложения, код приложения оптимизируется и минимизируется, для достижения наилучшей производительности.
-
-Во время выполнения инструкций по сборке проекта, в корне проекта создается директория `build`, в которую будут помещены результирующие файлы. После сборки проект готов к публикации.
-
-Подробную информацию вы можете найти на странице [Развертывание проекта](https://facebook.github.io/create-react-app/docs/deployment).
-
-### Извлечение конфигурации проекта
-
-```bash
-npm run eject
-```
-
-**Обратите внимание**, при запуске команды `npm run eject` нет возможности вернуть внесённые изменения обратно!
-
-Выполнение данной команды, `react-scripts` скопирует все конфигурационные файлы и скрипты в корень проекта. Данный процесс позволяет получить полный контроль над конфигурацией проекта.
-
-Не используйте данную команду, если не уверены как именно она работает или к какому результату приведёт ее выполнение.
