@@ -9,13 +9,13 @@
   <tr>
       <td>
         <a href="https://github.com/always-sixteen/six-cities/blob/master/asserts/main-screen.png?raw=true">
-          <img width="300px" caption="Подпись под картинкой" src="https://github.com/always-sixteen/six-cities/blob/master/asserts/main-screen.png?raw=true" alt="main page preview" />
+          <img caption="Подпись под картинкой" src="https://github.com/always-sixteen/six-cities/blob/master/asserts/main-screen.png?raw=true" alt="main page preview" />
           <p align="center">Main page</p>
         <a>
       </td>
       <td>
         <a href="https://github.com/always-sixteen/six-cities/blob/master/asserts/favorites-screen.png?raw=true">
-          <img width="300px" caption="Подпись под картинкой" src="https://github.com/always-sixteen/six-cities/blob/master/asserts/favorites-screen.png?raw=true" alt="favorites page preview" />
+          <img caption="Подпись под картинкой" src="https://github.com/always-sixteen/six-cities/blob/master/asserts/favorites-screen.png?raw=true" alt="favorites page preview" />
         <p align="center">Favorites page</p>
         <a>
       </td>
@@ -23,27 +23,25 @@
   <tr>
       <td>
         <a href="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/offer-screen.png">
-          <img width="300px" caption="Подпись под картинкой" src="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/offer-screen.png" alt="offer page preview" />
+          <img caption="Подпись под картинкой" src="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/offer-screen.png" alt="offer page preview" />
         <p align="center">Offer page</p>
         <a>
       </td>
       <td>
         <a href="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/login-screen.png">
-          <img width="300px" src="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/login-screen.png" alt="login page preview" />
+          <img src="https://raw.githubusercontent.com/always-sixteen/six-cities/master/asserts/login-screen.png" alt="login page preview" />
         <p align="center">Login page</p>
         <a>
       </td>
   </tr>
 </table>
 
-# Технологический стэк:
----
+# Технологический стэк
 React, TypeScript, Redux, Redux Toolkit, HTML, CSS, Jest, React Testing Library,
 
 
 
 # Инструкция для запуска проекта
------
 ### Запуск проекта:
 
 - Клонируйте репозиторий: `git clone https://github.com/always-sixteen/six-cities.git`
