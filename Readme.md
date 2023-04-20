@@ -1,5 +1,5 @@
 <!-- # [6 Cities](six-cities-kappa.vercel.app) -->
-<a href="six-cities-kappa.vercel.app">
+<a href="https://six-cities-kappa.vercel.app/">
   <img width="120" src="https://raw.githubusercontent.com/always-sixteen/six-cities/7db7c00b533dfc7bca2f76f57e061a0729d01de2/public/img/logo.svg" alt="6 cities">
 </a>
 
